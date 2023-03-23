@@ -1,0 +1,364 @@
+
+
+
+   #########################################
+###### BUSCA TARGETS PUTATIVOS NO REFFEQ ######
+   #########################################
+
+mkdir hg38
+mkdir mm10
+mkdir rn6
+mkdir ce11
+mkdir dm6
+mkdir crigri1
+
+#### REFSEQ/GENBANK data
+wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/refMrna.fa.gz -O hg38/hg38.refMrna.fa.gz
+wget http://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/refMrna.fa.gz -O mm10/mm10.refMrna.fa.gz
+wget http://hgdownload.soe.ucsc.edu/goldenPath/rn6/bigZips/refMrna.fa.gz -O rn6/rn6.refMrna.fa.gz
+wget http://hgdownload.soe.ucsc.edu/goldenPath/ce11/bigZips/refMrna.fa.gz -O ce11/ce11.refMrna.fa.gz
+wget http://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/refMrna.fa.gz -O dm6/dm6.refMrna.fa.gz
+wget http://hgdownload.cse.ucsc.edu/goldenPath/criGri1/bigZips/refMrna.fa.gz -O crigri1/crigri1.refMrna.fa.gz
+
+gunzip mm10/mm10.refMrna.fa.gz
+gunzip rn6/rn6.refMrna.fa.gz
+gunzip ce11/ce11.refMrna.fa.gz
+gunzip dm6/dm6.refMrna.fa.gz
+gunzip crigri1/crigri1.refMrna.fa.gz
+
+mv mm10/refMrna.fa mm10/mm10.refMrna.fa
+mv rn6/refMrna.fa rn6/rn6.refMrna.fa
+mv dm6/refMrna.fa dm6/dm6.refMrna.fa
+mv ce11/refMrna.fa ce11/ce11.refMrna.fa
+
+
+cd hg38/
+awk -v size=10000 -v pre=refMrnaCut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' hg38.refMrna.fa
+cd ..
+cd mm10/
+awk -v size=10000 -v pre=refMrnaCut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' mm10.refMrna.fa
+cd ..
+cd rn6/
+awk -v size=10000 -v pre=refMrnaCut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' rn6.refMrna.fa
+cd ..
+cd dm6/
+awk -v size=10000 -v pre=refMrnaCut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' dm6.refMrna.fa
+cd ..
+cd ce11/
+awk -v size=10000 -v pre=refMrnaCut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' ce11.refMrna.fa
+cd ..
+cd crigri1/
+awk -v size=10000 -v pre=refMrnaCut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' crigri1.refMrna.fa
+cd ..
+
+
+
+#### piRNA piRNAdb Data
+wget https://www.pirnadb.org/download/downloadarchive/pirna/piRNAdb.mmu.v1_7_5.fa.gz -O mm10/piRNAdb.mmu.v1_7_5.fa.gz
+wget https://www.pirnadb.org/download/downloadarchive/pirna/piRNAdb.rno.v1_7_5.fa.gz -O rn6/piRNAdb.rno.v1_7_5.fa.gz
+wget https://www.pirnadb.org/download/downloadarchive/pirna/piRNAdb.cel.v1_7_5.fa.gz -O ce11/piRNAdb.cel.v1_7_5.fa.gz
+wget https://www.pirnadb.org/download/downloadarchive/pirna/piRNAdb.dme.v1_7_5.fa.gz -O dm6/piRNAdb.dme.v1_7_5.fa.gz
+wget https://www.pirnadb.org/download/downloadarchive/pirna/piRNAdb.cgr.v1_7_5.fa.gz -O crigri1/piRNAdb.cgr.v1_7_5.fa.gz
+
+gunzip mm10/piRNAdb.mmu.v1_7_5.fa.gz
+gunzip rn6/piRNAdb.rno.v1_7_5.fa.gz
+gunzip ce11/piRNAdb.cel.v1_7_5.fa.gz
+gunzip dm6/piRNAdb.dme.v1_7_5.fa.gz
+gunzip crigri1/piRNAdb.cgr.v1_7_5.fa.gz
+
+cd hg38/
+awk -v size=10000 -v pre=piRNAdb.hsa.v1_7_5.fa.cut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' piRNAdb.hsa.v1_7_5.fa
+cd ..
+cd mm10/
+awk -v size=10000 -v pre=piRNAdb.mmu.v1_7_5.fa.cut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' piRNAdb.mmu.v1_7_5.fa
+cd ..
+cd rn6/
+awk -v size=10000 -v pre=piRNAdb.rno.v1_7_5.fa.cut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' piRNAdb.rno.v1_7_5.fa
+cd ..
+cd ce11/
+awk -v size=10000 -v pre=piRNAdb.cel.v1_7_5.fa.cut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' piRNAdb.cel.v1_7_5.fa
+cd ..
+cd dm6/
+awk -v size=10000 -v pre=piRNAdb.dme.v1_7_5.fa.cut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' piRNAdb.dme.v1_7_5.fa
+cd ..
+cd crigri1/
+awk -v size=10000 -v pre=piRNAdb.cgr.v1_7_5.fa.cut -v pad=5 '/^>/{n++;if(n%size==1){close(f);f=sprintf("%s.%0"pad"d",pre,n)}}{print>>f}' piRNAdb.cgr.v1_7_5.fa
+cd ..
+
+
+for eachFile in `ls hg38/refMrnaCut.* | cut -d "." -f 2`; do mkdir hg38/$eachFile; cp sRNAtargetmapper.pl hg38/$eachFile/sRNAtargetmapper.pl; cp hg38/refMrnaCut.$eachFile hg38/$eachFile/refMrnaCut.$eachFile; cp hg38/piRNAdb.hsa.v1_7_5.fa.cut* hg38/$eachFile/; done;
+for eachFile in `ls mm10/refMrnaCut.* | cut -d "." -f 2`; do mkdir mm10/$eachFile; cp sRNAtargetmapper.pl mm10/$eachFile/sRNAtargetmapper.pl; cp mm10/refMrnaCut.$eachFile mm10/$eachFile/refMrnaCut.$eachFile; cp mm10/piRNAdb.mmu.v1_7_5.fa.cut* mm10/$eachFile/; done;
+for eachFile in `ls rn6/refMrnaCut.* | cut -d "." -f 2`; do mkdir rn6/$eachFile; cp sRNAtargetmapper.pl rn6/$eachFile/sRNAtargetmapper.pl; cp rn6/refMrnaCut.$eachFile rn6/$eachFile/refMrnaCut.$eachFile; cp rn6/piRNAdb.rno.v1_7_5.fa.cut* rn6/$eachFile/; done;
+for eachFile in `ls ce11/refMrnaCut.* | cut -d "." -f 2`; do mkdir ce11/$eachFile; cp sRNAtargetmapper.pl ce11/$eachFile/sRNAtargetmapper.pl; cp ce11/refMrnaCut.$eachFile ce11/$eachFile/refMrnaCut.$eachFile; cp ce11/piRNAdb.cel.v1_7_5.fa.cut* ce11/$eachFile/; done;
+for eachFile in `ls dm6/refMrnaCut.* | cut -d "." -f 2`; do mkdir dm6/$eachFile; cp sRNAtargetmapper.pl dm6/$eachFile/sRNAtargetmapper.pl; cp dm6/refMrnaCut.$eachFile dm6/$eachFile/refMrnaCut.$eachFile; cp dm6/piRNAdb.dme.v1_7_5.fa.cut* dm6/$eachFile/; done;
+for eachFile in `ls crigri1/refMrnaCut.* | cut -d "." -f 2`; do mkdir crigri1/$eachFile; cp sRNAtargetmapper.pl crigri1/$eachFile/sRNAtargetmapper.pl; cp crigri1/refMrnaCut.$eachFile crigri1/$eachFile/refMrnaCut.$eachFile; cp crigri1/piRNAdb.cgr.v1_7_5.fa.cut* crigri1/$eachFile/; done;
+
+
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.00001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.00001.eland & done
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.10001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.10001.eland & done
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.20001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.20001.eland & done
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.30001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.30001.eland & done
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.40001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.40001.eland & done
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.50001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.50001.eland & done
+#for eachFile in `ls piRNAdb.hsa.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.60001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.60001.eland & done
+
+
+#for eachFile in `ls piRNAdb.mmu.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.00001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.00001.eland & done
+#for eachFile in `ls piRNAdb.mmu.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.10001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.10001.eland & done
+#for eachFile in `ls piRNAdb.mmu.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.20001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.20001.eland & done
+#for eachFile in `ls piRNAdb.mmu.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.30001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.30001.eland & done
+#for eachFile in `ls piRNAdb.mmu.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.40001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.40001.eland & done
+
+
+#for eachFile in `ls piRNAdb.rno.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.00001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.00001.eland & done
+#for eachFile in `ls piRNAdb.rno.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.10001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.10001.eland & done
+
+
+#for eachFile in `ls piRNAdb.cel.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.00001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.00001.eland & done
+#for eachFile in `ls piRNAdb.cel.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.10001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.10001.eland & done
+#for eachFile in `ls piRNAdb.cel.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.20001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.20001.eland & done
+#for eachFile in `ls piRNAdb.cel.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.30001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.30001.eland & done
+#for eachFile in `ls piRNAdb.cel.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.40001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.40001.eland & done
+#for eachFile in `ls piRNAdb.cel.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.50001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.50001.eland & done
+
+for eachFile in `ls piRNAdb.dme.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.00001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.00001.eland & done
+for eachFile in `ls piRNAdb.dme.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.10001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.10001.eland & done
+for eachFile in `ls piRNAdb.dme.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.20001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.20001.eland & done
+for eachFile in `ls piRNAdb.dme.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.30001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.30001.eland & done
+
+#for eachFile in `ls piRNAdb.cgr.v1_7_5.fa.cut.*1`; do perl sRNAtargetmapper.pl -i $eachFile -g refMrnaCut.00001 -v 0 -a all -n 0 -m 6 -s 8 -S 0 -c 1 -G 0 -p -o result.$eachFile.00001.eland & done
+
+
+perl sRNAtargetmapper.pl.1 -i queque.fa -g tata.fa -v 0 -a all -n 0 -m 6 -s 7 -S 2 -c 1 -G 0 -p -o eland.txt
+-S 0 -> QUero pegar so os que nao tme mm no seed ###1
+-n 0 -> nao deixo ter cauda. Mais facil
+-m 6 -> deixo isso no mm da parte fora do seed porque eh o maximo que eu pego. paa pegar casos onde nao tem mm no seed. depois limpo para pegar maximo de 6 mm em tudo.
+-s 7 -> seed da base 2 ate base 8 -> CRAIG
+-c 1 -> deixo ter clip na base 1
+-G 0 -> penalidade para GU
+-p   -> faz comq ue printe o alinhamento, mto mais facil de filtrar dps
+###1 -> CRAIG diz que nao ter mm no seed faz com que seja praticamente 100% efetivo, ter mm faz ficar menos efetivo, porem ao longo das geracoes ele compensa e na f8 ele acaba chegando a perto dos 50% de atuacao mesmo com esse mm. Porem eu nao estou ligando pra geracoe futuras, estou olhando para o paciente/individuo agora
+
+
+
+wget ftp://ftp.ncbi.nih.gov/gene/DATA/gene2refseq.gz
+wget ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz
+
+gunzip gene2refseq.gz
+gunzip gene_info.gz
+
+awk -F "\t" '{if($1=="9606" && length($4)>2){print $4"\t"$16}}' gene2refseq > hg38/gene2refseq.hg38.txt
+awk -F "\t" '{if($1=="10090" && length($4)>2){print $4"\t"$16}}' gene2refseq > mm10/gene2refseq.mm10.txt
+awk -F "\t" '{if($1=="10116" && length($4)>2){print $4"\t"$16}}' gene2refseq > rn6/gene2refseq.rn6.txt
+awk -F "\t" '{if($1=="7227" && length($4)>2){print $4"\t"$16}}' gene2refseq > dm6/gene2refseq.dm6.txt
+awk -F "\t" '{if($1=="6239" && length($4)>2){print $4"\t"$16}}' gene2refseq > ce11/gene2refseq.ce11.txt
+awk -F "\t" '{if($1=="10029" && length($4)>2){print $4"\t"$16}}' gene2refseq > crigri1/gene2refseq.crigri1.txt
+
+awk -F "\t" '{if($1=="9606"){print $3"\t"$10}}' gene_info > hg38/gene_info.hg38.txt
+awk -F "\t" '{if($1=="10090"){print $3"\t"$10}}' gene_info > mm10/gene_info.mm10.txt
+awk -F "\t" '{if($1=="10116"){print $3"\t"$10}}' gene_info > rn6/gene_info.rn6.txt
+awk -F "\t" '{if($1=="7227"){print $3"\t"$10}}' gene_info > dm6/gene_info.dm6.txt
+awk -F "\t" '{if($1=="6239"){print $3"\t"$10}}' gene_info > ce11/gene_info.ce11.txt
+awk -F "\t" '{if($1=="10029"){print $3"\t"$10}}' gene_info > crigri1/gene_info.crigri1.txt
+
+
+scp -P 1717 ../../../mnt/c/linuxFiles/filterEland.pl rpiuco@bioinfo.mochsl.org.br:/home/scratch60/newPirna_2/teste3/
+
+
+cat 00001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.00001.temp
+cat 10001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.10001.temp
+cat 20001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.20001.temp
+cat 30001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.30001.temp
+cat 40001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.40001.temp
+cat 50001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.50001.temp
+cat 60001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > hsa_targets.60001.temp
+
+cat 00001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > mmu_targets.00001.temp
+cat 10001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > mmu_targets.10001.temp
+cat 20001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > mmu_targets.20001.temp
+cat 30001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > mmu_targets.30001.temp
+cat 40001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > mmu_targets.40001.temp
+
+cat 00001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > rno_targets.00001.temp
+cat 10001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > rno_targets.10001.temp
+
+cat 00001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > dme_targets.00001.temp
+cat 10001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > dme_targets.10001.temp
+cat 20001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > dme_targets.20001.temp
+cat 30001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > dme_targets.30001.temp
+
+cat 00001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cel_targets.00001.temp
+cat 10001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cel_targets.10001.temp
+cat 20001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cel_targets.20001.temp
+cat 30001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cel_targets.30001.temp
+cat 40001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cel_targets.40001.temp
+cat 50001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cel_targets.50001.temp
+
+cat 00001/*.eland | awk -F "\t" 'BEGIN {OFS = "\n"} {header = $0 ; getline locusSeq; getline dotBar; getline pirnaSeq; print header"\t"dotBar}' > cgr_targets.00001.temp
+
+
+cat hg38/hsa_targets.*.temp > hg38/hsa_targets.all.temp
+cat mm10/mmu_targets.*.temp > mm10/mmu_targets.all.temp
+cat rn6/rno_targets.*.temp > rn6/rno_targets.all.temp
+cat ce11/cel_targets.*.temp > ce11/cel_targets.all.temp
+cat dm6/dme_targets.*.temp > dm6/dme_targets.all.temp
+cat crigri1/cgr_targets.*.temp > crigri1/cgr_targets.all.temp
+
+rm -r hg38/hsa_targets.*001.temp
+rm -r mm10/mmu_targets.*001.temp
+rm -r rn6/rno_targets.*001.temp
+rm -r ce11/cel_targets.*001.temp
+rm -r dm6/dme_targets.*001.temp
+rm -r crigri1/cgr_targets.*001.temp
+
+
+perl filterEland.pl -f hg38/hsa_targets.all.temp > hg38/hsa_targets.all
+perl filterEland.pl -f mm10/mmu_targets.all.temp > mm10/mmu_targets.all
+perl filterEland.pl -f rn6/rno_targets.all.temp > rn6/rno_targets.all
+perl filterEland.pl -f ce11/cel_targets.all.temp > ce11/cel_targets.all
+perl filterEland.pl -f dm6/dme_targets.all.temp > dm6/dme_targets.all
+perl filterEland.pl -f crigri1/cgr_targets.all.temp > crigri1/cgr_targets.all
+
+
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$1])>0){print $0"\t"a[$1]} }' hg38/gene2refseq.hg38.txt hg38/hsa_targets.all > hg38/hsa_targets.full.temp
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$1])>0){print $0"\t"a[$1]} }' mm10/gene2refseq.mm10.txt mm10/mmu_targets.all > mm10/mmu_targets.full.temp
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$1])>0){print $0"\t"a[$1]} }' rn6/gene2refseq.rn6.txt rn6/rno_targets.all > rn6/rno_targets.full.temp
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$1])>0){print $0"\t"a[$1]} }' dm6/gene2refseq.dm6.txt dm6/dme_targets.all > dm6/dme_targets.full.temp
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$1])>0){print $0"\t"a[$1]} }' ce11/gene2refseq.ce11.txt ce11/cel_targets.all > ce11/cel_targets.full.temp
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$1])>0){print $0"\t"a[$1]} }' crigri1/gene2refseq.crigri1.txt crigri1/cgr_targets.all > crigri1/cgr_targets.full.temp
+
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$7])>0){print $0"\t"a[$7]} }' hg38/gene_info.hg38.txt hg38/hsa_targets.full.temp > hg38/hsa_targets.full
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$7])>0){print $0"\t"a[$7]} }' mm10/gene_info.mm10.txt mm10/mmu_targets.full.temp > mm10/mmu_targets.full
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$7])>0){print $0"\t"a[$7]} }' rn6/gene_info.rn6.txt rn6/rno_targets.full.temp > rn6/rno_targets.full
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$7])>0){print $0"\t"a[$7]} }' dm6/gene_info.dm6.txt dm6/dme_targets.full.temp > dm6/dme_targets.full
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$7])>0){print $0"\t"a[$7]} }' ce11/gene_info.ce11.txt ce11/cel_targets.full.temp > ce11/cel_targets.full
+awk 'FNR==NR { a[$1] = $2; next } { if(length(a[$7])>0){print $0"\t"a[$7]} }' crigri1/gene_info.crigri1.txt crigri1/cgr_targets.full.temp > crigri1/cgr_targets.full
+
+
+rm -r hg38/hsa_targets.full.temp
+rm -r mm10/mmu_targets.full.temp
+rm -r rn6/rno_targets.full.temp
+rm -r dm6/dme_targets.full.temp
+rm -r ce11/cel_targets.full.temp
+rm -r crigri1/cgr_targets.full.temp
+
+
+sed 's/pseudo/pseudogene/g;s/protein-coding/protein coding/g' -i hg38/hsa_targets.full
+sed 's/pseudo/pseudogene/g;s/protein-coding/protein coding/g' -i mm10/mmu_targets.full
+sed 's/pseudo/pseudogene/g;s/protein-coding/protein coding/g' -i rn6/rno_targets.full
+sed 's/pseudo/pseudogene/g;s/protein-coding/protein coding/g' -i dm6/dme_targets.full
+sed 's/pseudo/pseudogene/g;s/protein-coding/protein coding/g' -i ce11/cel_targets.full
+sed 's/pseudo/pseudogene/g;s/protein-coding/protein coding/g' -i crigri1/cgr_targets.full
+
+
+awk -F "\t" '{print $1"|"$7"|"$8}' hg38/hsa_targets.full | sort -k 1 | uniq | awk -F "|" '{print "\""$1"\",\""$2"\",\""$3"\""}' >hg38/hsa_targets.csv
+awk -F "\t" '{print $1"|"$7"|"$8}' mm10/mmu_targets.full | sort -k 1 | uniq | awk -F "|" '{print "\""$1"\",\""$2"\",\""$3"\""}' >mm10/mmu_targets.csv
+awk -F "\t" '{print $1"|"$7"|"$8}' rn6/rno_targets.full | sort -k 1 | uniq | awk -F "|" '{print "\""$1"\",\""$2"\",\""$3"\""}' >rn6/rno_targets.csv
+awk -F "\t" '{print $1"|"$7"|"$8}' dm6/dme_targets.full | sort -k 1 | uniq | awk -F "|" '{print "\""$1"\",\""$2"\",\""$3"\""}' >dm6/dme_targets.csv
+awk -F "\t" '{print $1"|"$7"|"$8}' ce11/cel_targets.full | sort -k 1 | uniq | awk -F "|" '{print "\""$1"\",\""$2"\",\""$3"\""}' >ce11/cel_targets.csv
+awk -F "\t" '{print $1"|"$7"|"$8}' crigri1/cgr_targets.full | sort -k 1 | uniq | awk -F "|" '{print "\""$1"\",\""$2"\",\""$3"\""}' >crigri1/cgr_targets.csv
+
+
+awk -F "\t" '{print "\""$1"\","$2",\""$3"\","$5",\""$6"\",\""$4"\""}' hg38/hsa_targets.full > hg38/hsa_relPirnaTargets.csv
+awk -F "\t" '{print "\""$1"\","$2",\""$3"\","$5",\""$6"\",\""$4"\""}' mm10/mmu_targets.full > mm10/mmu_relPirnaTargets.csv
+awk -F "\t" '{print "\""$1"\","$2",\""$3"\","$5",\""$6"\",\""$4"\""}' rn6/rno_targets.full > rn6/rno_relPirnaTargets.csv
+awk -F "\t" '{print "\""$1"\","$2",\""$3"\","$5",\""$6"\",\""$4"\""}' ce11/cel_targets.full > ce11/cel_relPirnaTargets.csv
+awk -F "\t" '{print "\""$1"\","$2",\""$3"\","$5",\""$6"\",\""$4"\""}' dm6/dme_targets.full > dm6/dme_relPirnaTargets.csv
+awk -F "\t" '{print "\""$1"\","$2",\""$3"\","$5",\""$6"\",\""$4"\""}' crigri1/cgr_targets.full > crigri1/cgr_relPirnaTargets.csv
+
+
+tar -cf targets.tar hg38/hsa_targets.csv mm10/mmu_targets.csv rn6/rno_targets.csv dm6/dme_targets.csv ce11/cel_targets.csv crigri1/cgr_targets.csv
+tar -cf relPirnaTargets.tar hg38/hsa_relPirnaTargets.csv mm10/mmu_relPirnaTargets.csv rn6/rno_relPirnaTargets.csv ce11/cel_relPirnaTargets.csv dm6/dme_relPirnaTargets.csv crigri1/cgr_relPirnaTargets.csv
+
+scp -P 1717 rpiuco@bioinfo.mochsl.org.br:/home/scratch60/newPirna_2/teste3/targets.tar .
+scp -P 1717 rpiuco@bioinfo.mochsl.org.br:/home/scratch60/newPirna_2/teste3/relPirnaTargets.tar .
+
+
+
+echo LOAD "DATA LOCAL INFILE 'hg38/hsa_targets.csv' INTO TABLE target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_name, target_type);" >> pirnaDbTargets.sql
+echo LOAD "DATA LOCAL INFILE 'mm10/mmu_targets.csv' INTO TABLE target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_name, target_type);" >> pirnaDbTargets.sql
+echo LOAD "DATA LOCAL INFILE 'rn6/rno_targets.csv' INTO TABLE target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_name, target_type);" >> pirnaDbTargets.sql
+echo LOAD "DATA LOCAL INFILE 'ce11/cel_targets.csv' INTO TABLE target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_name, target_type);" >> pirnaDbTargets.sql
+echo LOAD "DATA LOCAL INFILE 'dm6/dme_targets.csv' INTO TABLE target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_name, target_type);" >> pirnaDbTargets.sql
+echo LOAD "DATA LOCAL INFILE 'crigri1/cgr_targets.csv' INTO TABLE target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_name, target_type);" >> pirnaDbTargets.sql
+
+
+split -l 200000 hg38/hsa_relPirnaTargets.csv HS_RelPirnaTarget_
+split -l 200000 mm10/mmu_relPirnaTargets.csv MM_RelPirnaTarget_
+split -l 200000 rn6/rno_relPirnaTargets.csv RN_RelPirnaTarget_
+split -l 200000 ce11/cel_relPirnaTargets.csv CE_RelPirnaTarget_
+split -l 200000 dm6/dme_relPirnaTargets.csv DM_RelPirnaTarget_
+split -l 200000 crigri1/cgr_relPirnaTargets.csv CG_RelPirnaTarget_
+
+for eachItem in `ls HS_RelPirnaTarget_*`; do echo "LOAD DATA LOCAL INFILE '$eachItem' INTO TABLE rel_pirna_target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_start, target_seq, target_score, target_dotbar, pirna_access);" >> pirnaDbRelPirnaTargets.hs.sql; done;
+for eachItem in `ls MM_RelPirnaTarget_*`; do echo "LOAD DATA LOCAL INFILE '$eachItem' INTO TABLE rel_pirna_target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_start, target_seq, target_score, target_dotbar, pirna_access);" >> pirnaDbRelPirnaTargets.mm.sql; done;
+for eachItem in `ls RN_RelPirnaTarget_*`; do echo "LOAD DATA LOCAL INFILE '$eachItem' INTO TABLE rel_pirna_target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_start, target_seq, target_score, target_dotbar, pirna_access);" >> pirnaDbRelPirnaTargets.rn.sql; done;
+for eachItem in `ls CE_RelPirnaTarget_*`; do echo "LOAD DATA LOCAL INFILE '$eachItem' INTO TABLE rel_pirna_target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_start, target_seq, target_score, target_dotbar, pirna_access);" >> pirnaDbRelPirnaTargets.ce.sql; done;
+for eachItem in `ls DM_RelPirnaTarget_*`; do echo "LOAD DATA LOCAL INFILE '$eachItem' INTO TABLE rel_pirna_target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_start, target_seq, target_score, target_dotbar, pirna_access);" >> pirnaDbRelPirnaTargets.dm.sql; done;
+for eachItem in `ls CG_RelPirnaTarget_*`; do echo "LOAD DATA LOCAL INFILE '$eachItem' INTO TABLE rel_pirna_target FIELDS TERMINATED BY ',' ENCLOSED BY '\"' (target_code, target_start, target_seq, target_score, target_dotbar, pirna_access);" >> pirnaDbRelPirnaTargets.cg.sql; done;
+
+
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbTargets.sql
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbRelPirnaTargets.hs.sql
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbRelPirnaTargets.mm.sql
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbRelPirnaTargets.rn.sql
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbRelPirnaTargets.ce.sql
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbRelPirnaTargets.dm.sql
+c:\xampp\mysql\bin\mysql.exe -u root -p -h localhost pirna_db < pirnaDbRelPirnaTargets.cg.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+awk -F "\t" '{print"\""$1"\",\""$7"\",\""$8"\""}' hg38/hsa_targets.full > hg38/hsa_targets.full.csv
+
+NM_058260.4     25      AUUCACAAUGGUGAAGAUGUU   cel-piR-10910   18      .|||..||::|.:|||||||.   homt-1  protein-coding
+NM_058260.4     34      GGUGAAGAUGUUUAUGAAAAG   cel-piR-13169   17      |:.:|.:.||..:||||||||   homt-1  protein-coding
+NM_058260.4     45      UUAUGAAAAGGCGGAGGAAUA   cel-piR-2584    16      |....||.|::.:||||||||   homt-1  protein-coding
+
+
+
+
+
+
+
+
+
+
+ftp://ftp.ncbi.nih.gov/gene/DATA/gene2refseq.gz -> ID para geneName
+ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz -> geneName pego o biotype
+|-> separar por taxonomy id
+Hsapiens : 9606
+MM : 10090
+RN : 10116
+DM : 7227
+CE : 6239
+CG : 10029
+
+
+
+
+###### NAO FUNCIONA ######
+ RNAup query.fa rna.fa  -d 2 --noLP -w 21 --include_both -c 'S' -u 8 
+ RNAhybrid -q qu1.fa -t ta1.fa -s 3utr_human -b 2 -f 2,7
+ RNAplex -t ../refMrna.fa -q teta.fa
+ IntaRNA predicts RNA-RNA interactions.
+
